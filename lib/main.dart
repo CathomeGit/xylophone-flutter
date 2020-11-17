@@ -20,49 +20,49 @@ class _XylophoneAppState extends State<XylophoneApp> {
             children: [
               FlatButton(
                 onPressed: () {
-                  player.play('note1.wav');
+                  playSound(1);
                 },
                 color: Colors.red,
                 child: null,
               ),
               FlatButton(
                 onPressed: () {
-                  player.play('note2.wav');
+                  playSound(2);
                 },
                 color: Colors.orange,
                 child: null,
               ),
               FlatButton(
                 onPressed: () {
-                  player.play('note3.wav');
+                  playSound(3);
                 },
                 color: Colors.yellow,
                 child: null,
               ),
               FlatButton(
                 onPressed: () {
-                  player.play('note4.wav');
+                  playSound(4);
                 },
                 color: Colors.green,
                 child: null,
               ),
               FlatButton(
                 onPressed: () {
-                  player.play('note5.wav');
+                  playSound(5);
                 },
                 color: Colors.lightBlue,
                 child: null,
               ),
               FlatButton(
                 onPressed: () {
-                  player.play('note6.wav');
+                  playSound(6);
                 },
                 color: Colors.blue,
                 child: null,
               ),
               FlatButton(
                 onPressed: () {
-                  player.play('note7.wav');
+                  playSound(7);
                 },
                 color: Colors.purple,
                 child: null,
@@ -72,5 +72,9 @@ class _XylophoneAppState extends State<XylophoneApp> {
         ),
       ),
     );
+  }
+
+  void playSound(int index) {
+    player.play('note$index.wav');
   }
 }
