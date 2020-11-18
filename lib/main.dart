@@ -10,64 +10,25 @@ class XylophoneApp extends StatefulWidget {
 
 class _XylophoneAppState extends State<XylophoneApp> {
   final player = new AudioCache();
+  final Map<int, Color> buttonProps = {
+    1: Colors.red,
+    2: Colors.orange,
+    3: Colors.yellow,
+    4: Colors.green,
+    5: Colors.lightBlue,
+    6: Colors.blue,
+    7: Colors.purple
+  };
 
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
       home: Scaffold(
+        backgroundColor: Colors.black,
         body: SafeArea(
           child: Column(
-            children: [
-              FlatButton(
-                onPressed: () {
-                  playSound(1);
-                },
-                color: Colors.red,
-                child: null,
-              ),
-              FlatButton(
-                onPressed: () {
-                  playSound(2);
-                },
-                color: Colors.orange,
-                child: null,
-              ),
-              FlatButton(
-                onPressed: () {
-                  playSound(3);
-                },
-                color: Colors.yellow,
-                child: null,
-              ),
-              FlatButton(
-                onPressed: () {
-                  playSound(4);
-                },
-                color: Colors.green,
-                child: null,
-              ),
-              FlatButton(
-                onPressed: () {
-                  playSound(5);
-                },
-                color: Colors.lightBlue,
-                child: null,
-              ),
-              FlatButton(
-                onPressed: () {
-                  playSound(6);
-                },
-                color: Colors.blue,
-                child: null,
-              ),
-              FlatButton(
-                onPressed: () {
-                  playSound(7);
-                },
-                color: Colors.purple,
-                child: null,
-              ),
-            ],
+            crossAxisAlignment: CrossAxisAlignment.stretch,
+            children: createFromProps(buttonProps),
           ),
         ),
       ),
@@ -76,5 +37,19 @@ class _XylophoneAppState extends State<XylophoneApp> {
 
   void playSound(int index) {
     player.play('note$index.wav');
+  }
+
+  List<Expanded> createFromProps(Map<int, Color> buttonProps) {
+    return buttonProps.entries
+        .map((e) => Expanded(
+              child: FlatButton(
+                onPressed: () {
+                  playSound(e.key);
+                },
+                color: e.value,
+                child: null,
+              ),
+            ))
+        .toList();
   }
 }
