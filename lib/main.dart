@@ -10,15 +10,6 @@ class XylophoneApp extends StatefulWidget {
 
 class _XylophoneAppState extends State<XylophoneApp> {
   final player = new AudioCache();
-  final Map<int, Color> buttonProps = {
-    1: Colors.red,
-    2: Colors.orange,
-    3: Colors.yellow,
-    4: Colors.green,
-    5: Colors.lightBlue,
-    6: Colors.blue,
-    7: Colors.purple
-  };
 
   @override
   Widget build(BuildContext context) {
@@ -28,7 +19,15 @@ class _XylophoneAppState extends State<XylophoneApp> {
         body: SafeArea(
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.stretch,
-            children: createFromProps(buttonProps),
+            children: [
+              buildKey(noteIdx: 1, keyColor: Colors.red),
+              buildKey(noteIdx: 2, keyColor: Colors.orange),
+              buildKey(noteIdx: 3, keyColor: Colors.yellow),
+              buildKey(noteIdx: 4, keyColor: Colors.green),
+              buildKey(noteIdx: 5, keyColor: Colors.lightBlue),
+              buildKey(noteIdx: 6, keyColor: Colors.blue),
+              buildKey(noteIdx: 7, keyColor: Colors.purple),
+            ],
           ),
         ),
       ),
@@ -39,17 +38,15 @@ class _XylophoneAppState extends State<XylophoneApp> {
     player.play('note$index.wav');
   }
 
-  List<Expanded> createFromProps(Map<int, Color> buttonProps) {
-    return buttonProps.entries
-        .map((e) => Expanded(
-              child: FlatButton(
-                onPressed: () {
-                  playSound(e.key);
-                },
-                color: e.value,
-                child: null,
-              ),
-            ))
-        .toList();
+  Expanded buildKey({int noteIdx, Color keyColor}) {
+    return Expanded(
+      child: FlatButton(
+        onPressed: () {
+          playSound(noteIdx);
+        },
+        color: keyColor,
+        child: null,
+      ),
+    );
   }
 }
